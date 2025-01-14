@@ -35,11 +35,15 @@ def save(operator, context, filepath=""):
   jsonData['markers'] = []
   for k, v in scene.timeline_markers.items():
     frame = v.frame
+    camera_name = ''
+    if v.camera:
+        camera_name = v.camera.name
     frame_time = frame_to_time(frame, fps)
     jsonData['markers'].append({
         'name': v.name,
         'time': frame_time,
-        'frame': frame
+        'frame': frame,
+        'cameraname': camera_name
     })
 
   write_file( filepath, jsonData )
